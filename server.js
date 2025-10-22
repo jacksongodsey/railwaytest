@@ -7,11 +7,15 @@ const app = express();
 app.use(cors());
 app.use(Gun.serve);
 
-const server = http.createServer(app);
-const gun = Gun({ web: server });
-
+// Railway assigns PORT dynamically
 const PORT = process.env.PORT || 8765;
-server.listen(PORT, () => {
+
+// create server and attach gun
+const server = http.createServer(app);
+Gun({ web: server });
+
+// log startup confirmation
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ GUN relay running on port ${PORT}`);
 });
 

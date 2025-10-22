@@ -15,7 +15,7 @@ const server = http.createServer(app);
 Gun({ web: server });
 
 // log startup confirmation
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ GUN relay running on port ${PORT}`);
+server.listen(process.env.PORT || 8080, '0.0.0.0', () => {
+  console.log(`✅ GUN relay running on port ${process.env.PORT || 8080}`);
 });
 

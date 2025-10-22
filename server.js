@@ -1,9 +1,17 @@
 import Gun from 'gun';
-import 'gun/sea.js';
-import 'gun/axe.js';
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+
+const app = express();
+app.use(cors());
+app.use(Gun.serve);
+
+const server = http.createServer(app);
+const gun = Gun({ web: server });
 
 const PORT = process.env.PORT || 8765;
-const gun = Gun({ web: require('http').createServer().listen(PORT) });
-
-console.log(`GUN relay running on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`✅ GUN relay running on port ${PORT}`);
+});
 
